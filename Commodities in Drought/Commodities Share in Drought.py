@@ -31,14 +31,12 @@ select = Select(browser.find_element_by_id('location'))
 select.select_by_visible_text('CONUS')
 select = Select(browser.find_element_by_id('ContentPlaceHolder1_croptype'))
 
-#year = Select(browser.find_element_by_id("yr-all"))
+browser.find_element_by_id('yr-all').click()
 commodities = ["Cattle", "Hogs and Pigs", "Milk Cows"]
 data = []
 
 for commodity in commodities:
     select.select_by_visible_text(commodity)
-    browser.find_element_by_id('yr-all').click()
- 
     table = browser.find_element_by_id('datatab').get_attribute('outerHTML')
     soup = BeautifulSoup(table, 'html.parser')
     dfData = pd.read_html(str(soup))[0]
